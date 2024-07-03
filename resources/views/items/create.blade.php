@@ -2,31 +2,44 @@
 <html>
 <head>
     <title>Add Item</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Add Item</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Items</h1>
+        <a href="{{ route('items.index') }}" class="btn btn-danger mb-4">Back to items</a>
 
-    <form action="{{ route('items.store') }}" method="POST">
-        @csrf
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <div class="card">
+            <div class="card-header">
+                Add Item
+            </div>
+            <div class="card-body">
+                <form action="{{ route('items.store') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" class="form-control"></textarea>
+                    </div>
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price" class="form-control" required>
+                    </div>
 
-        <label for="type">Type:</label>
-        <select id="type" name="type" required>
-            <option value="weapon">Weapon</option>
-            <option value="armor">Armor</option>
-            <option value="magic">Magic</option>
-        </select>
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <select id="type" name="type" class="form-control" required>
+                            <option value="weapon">Weapon</option>
+                            <option value="armor">Armor</option>
+                            <option value="magic">Magic</option>
+                        </select>
+                    </div>
 
-        <button type="submit">Add Item</button>
-    </form>
-
-    <a href="{{ route('items.index') }}">Back to items</a>
-</body>
-</html>
+                    <button type="submit" class="btn btn-info">Add Item</button>
+                </form>
+            </div>
