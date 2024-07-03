@@ -48,5 +48,34 @@ class ItemController extends Controller
 
         return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
     }
+
+    public function show($id)
+    {
+        try {
+            $item = Item::findOrFail($id);
+            return view('items.show', compact('item'));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('items.index')->with('error', 'Item not found!');
+        }
+    }
+
+    public function edit(Item $item)
+    {
+        return view('items.edit', compact('item'));
+    }
+
+    public function update(Request $request, Item $Item)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'type' => 'required|in:weapon,armor,magic',
+        ]);
+
+        $Item->update($validated);
+
+        return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+    }
 }
 
