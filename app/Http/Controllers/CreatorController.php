@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class CreatorController extends Controller
 {
+
+
+
     public function index()
     {
         $creators = Creator::paginate(10);
