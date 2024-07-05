@@ -18,13 +18,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
-Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-Route::delete('/items/{items}', [ItemController::class, 'destroy'])->name('items.destroy');
-Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
-Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
-Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
+Route::middleware(['auth'])->group(function () { 
 
-Route::resource('creators', CreatorController::class);
+    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+    Route::delete('/items/{items}', [ItemController::class, 'destroy'])->name('items.destroy');
+    Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
+
+    Route::resource('creators', CreatorController::class);
+});
+
+
 require __DIR__.'/auth.php';
