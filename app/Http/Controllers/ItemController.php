@@ -10,15 +10,12 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Item::query();
+        $type = $request->query('type', 'all');
+        $items = Item::when($type != 'all', function ($query) use ($type) {
+            return $query->where('type', $type);
+        })->paginate(2); 
 
-        if ($request->has('type') && $request->input('type') != null) 
-        {
-            $query->where('type', $request->type);
-        }
-        $items = $query->get();
-
-        return view('items.index', compact('items'));
+        return view('items.index', compact('items', 'type'));
     }
 
     public function create()
