@@ -42,6 +42,7 @@
                     @endforeach
                 </select>
             </div>
+            <a href="{{ route('items.index') }}" class="btn btn-primary">Back to items</a>
             <button type="submit" class="btn btn-primary">Update Product</button>
         </form>
     </div>
