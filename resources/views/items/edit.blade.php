@@ -1,5 +1,12 @@
 
-    <div class="container">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Items</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div class="container">
         <h1>Edit Product</h1>
 
         @if($errors->any())
