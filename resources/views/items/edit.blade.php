@@ -6,8 +6,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<div class="container">
-        <h1>Edit Product</h1>
+<div class="container">s
+        <h1>Edit Item</h1>
 
         @if($errors->any())
             <div class="alert alert-danger">
