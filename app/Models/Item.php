@@ -49,5 +49,10 @@ class Item extends Model
     {
         return in_array($value, self::TYPES);
     }
+
+    public function creators()
+    {
+        return $this->belongsToMany(Creator::class);
+    }
 }
 

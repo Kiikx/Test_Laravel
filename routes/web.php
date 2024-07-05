@@ -3,7 +3,7 @@
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\creatorController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,5 +26,5 @@ Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.e
 Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
 Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
-
+Route::resource('creators', CreatorController::class);
 require __DIR__.'/auth.php';

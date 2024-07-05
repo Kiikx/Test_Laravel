@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Creator;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -11,39 +12,36 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $type = $request->query('type', 'all');
-        $items = Item::when($type != 'all', function ($query) use ($type) {
-            return $query->where('type', $type);
-        })->paginate(2); 
+        $items = Item::with('creators')
+            ->when($type != 'all', function ($query) use ($type) {
+                return $query->where('type', $type);
+            })->paginate(10); 
 
         return view('items.index', compact('items', 'type'));
     }
 
+
     public function create()
     {
-        return view('items.create');
+        $creators = Creator::all();
+        return view('items.create', compact('creators'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'type' => 'required|in:weapon,armor,magic',
+            'creators' => 'array',
+            'creators.*' => 'exists:creators,id',
         ]);
 
-        Item::create($request->all());
+        $item = Item::create($validated);
+        $item->creators()->attach($request->creators);
 
         return redirect()->route('items.index')->with('success', 'Item created successfully.');
-    }
-
-    public function destroy($id)
-    {
-        
-        $item = Item::findOrFail($id);
-        $item->delete();
-
-        return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
     }
 
     public function show($id)
@@ -58,21 +56,31 @@ class ItemController extends Controller
 
     public function edit(Item $item)
     {
-        return view('items.edit', compact('item'));
+        $creators = Creator::all();
+        return view('items.edit', compact('item', 'creators'));
     }
 
-    public function update(Request $request, Item $Item)
+    public function update(Request $request, Item $item)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'type' => 'required|in:weapon,armor,magic',
+            'creators' => 'array',
+            'creators.*' => 'exists:creators,id',
         ]);
 
-        $Item->update($validated);
+        $item->update($validated);
+        $item->creators()->sync($request->creators);
 
         return redirect()->route('items.index')->with('success', 'Item updated successfully.');
+    }
+
+    public function destroy(Item $item)
+    {
+        $item->delete();
+        return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
     }
 }
 

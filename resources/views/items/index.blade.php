@@ -17,7 +17,7 @@
                 </select>
             </div>
         </form>
-
+        <a href="{{ route('creators.index') }}" class="btn btn-primary mb-4">Go to Creators</a>
         <h1 class="mb-4">Items</h1>
         <a href="{{ route('items.create') }}" class="btn btn-primary mb-4">Add item</a>
 
@@ -40,6 +40,7 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Type</th>
+                    <th>Creators</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -50,6 +51,11 @@
                         <td>{{ $item->description }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ ucfirst($item->type) }}</td>
+                        <td>
+                            @foreach($item->creators as $creator)
+                                <a class="badge badge-secondary" href="/creators/{{ $creator->id }}">{{ $creator->name }}</a>
+                            @endforeach
+                        </td>
                         <td>
                             <a href="{{ route('items.show', $item->id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
