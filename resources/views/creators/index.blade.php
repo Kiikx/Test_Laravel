@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Item</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app')
+
+@section('content')
 <div class="container mt-5">
-<a href="{{ route('items.index') }}" class="btn btn-primary mb-4">Go to Items</a>
 
     <h1>Creators</h1>
 
@@ -53,3 +49,5 @@
 
     {{ $creators->links() }}
 </div>
+
+@endsection

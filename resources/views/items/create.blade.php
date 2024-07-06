@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Item</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@extends('layouts.app')
+
+@section('content')
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
@@ -56,3 +53,4 @@
         </div>
     </div>
 </div>
+@endsection
