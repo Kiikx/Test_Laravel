@@ -14,6 +14,13 @@ class Creator extends Model
         'speciality',
     ];
 
+    const SPECIALITY = [
+        'Blacksmith',
+        'Armorer',
+        'enchanter',
+    ];
+
+
     public function items()
     {
         return $this->belongsToMany(Item::class, 'creator_item');

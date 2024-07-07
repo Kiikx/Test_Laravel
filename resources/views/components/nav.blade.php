@@ -6,12 +6,12 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
-            @auth
+            @if (Auth::user()->is_admin == '1')
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="{{ route('items.index') }}">{{ __('Items') }}</a>
                     <a class="nav-link" href="{{ route('creators.index') }}">{{ __('Creators') }}</a>
                 </ul>
-            @endauth
+            @endif
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">

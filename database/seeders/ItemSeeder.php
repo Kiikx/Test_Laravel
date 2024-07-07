@@ -12,18 +12,18 @@ class ItemSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Item::create([
-            'name' => 'Short Sword',
-            'description' => 'A bad quality short sword',
-            'type' => 'weapon',
-            'price' => 10
-        ]);
+        // \App\Models\Item::create([
+        //     'name' => 'Short Sword',
+        //     'description' => 'A bad quality short sword',
+        //     'type' => 'weapon',
+        //     'price' => 10
+        // ]);
     
-        \App\Models\Item::create([
-            'name' => 'Wooden Shield',
-            'description' => 'Little shield made of wood',
-            'type' => 'armor',
-            'price' => 8
-        ]);
+        // \App\Models\Item::create([
+        //     'name' => 'Wooden Shield',
+        //     'description' => 'Little shield made of wood',
+        //     'type' => 'armor',
+        //     'price' => 8
+        // ]);
     }
 }
