@@ -12,9 +12,10 @@
                 <p>No items found for this creator.</p>
             @else
                 <h3>Item(s) created by this creator : </h3>
-                <ul>
+                <ul class="list-group mt-md-3">
+                    
                     @foreach($creator->items as $item)
-                        <li>
+                        <li class="list-group-item " >
                             <a href="{{ route('items.show', $item->id) }}">{{ $item->name }}</a>
                         </li>
                     @endforeach
