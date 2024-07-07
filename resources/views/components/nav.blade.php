@@ -1,17 +1,21 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            BaGoblin
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @auth
+            
             @if (Auth::user()->is_admin == '1')
                 <ul class="navbar-nav mr-auto">
                     <a class="nav-link" href="{{ route('items.index') }}">{{ __('Items') }}</a>
                     <a class="nav-link" href="{{ route('creators.index') }}">{{ __('Creators') }}</a>
                 </ul>
             @endif
+        @endauth
+
             <ul class="navbar-nav ml-auto">
                 @guest
                     <li class="nav-item">

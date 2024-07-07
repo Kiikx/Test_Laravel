@@ -10,7 +10,16 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
 
+    public function home(Request $request)
+    {
+        $type = $request->query('type', 'all');
+        $items = Item::with('creators')
+            ->when($type != 'all', function ($query) use ($type) {
+                return $query->where('type', $type);
+            })->paginate(10); 
 
+        return view('items.home', compact('items', 'type'));
+    }
 
     public function index(Request $request)
     {

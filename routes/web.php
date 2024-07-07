@@ -7,9 +7,7 @@ use App\Http\Controllers\creatorController;
 
 use \App\Http\Middleware\AdminMiddleware;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -22,6 +20,8 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/', [ItemController::class, 'home'])->name('home');
+
 Route::middleware('admin')->group(function () {
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
@@ -32,6 +32,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
 });
+
 // Route::get('/items', [ItemController::class, 'index'])->name('items.index')->middleware(AdminMiddleware::class);
 // Route::get('/items/create', [ItemController::class, 'create'])->name('items.create')->middleware(AdminMiddleware::class);
 // Route::post('/items', [ItemController::class, 'store'])->name('items.store')->middleware(AdminMiddleware::class);
