@@ -16,13 +16,22 @@
                 <p class="card-text">${{ number_format($item->price, 2) }}</p>
                 <h5 class="card-title">Type</h5>
                 <p class="card-text">{{ ucfirst($item->type) }}</p>
-                <a href="{{ route('items.index') }}" class="btn btn-primary">Back to items</a>
-                <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                @if(Auth::user())
+                    @if (Auth::user()->is_admin == 0)
+                        <a href="{{ route('items.index') }}" class="btn btn-primary">Back to items</a>
+                        <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('items.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    @endif
+                    
+                @else
+                    <a href="{{ route('home') }}" class="btn btn-primary">Back to Home</a>
+                @endif
+                
+                
             </div>
         </div>
     </div>

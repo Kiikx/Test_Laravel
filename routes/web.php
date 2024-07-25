@@ -5,11 +5,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\creatorController;
 
+use App\Http\Controllers\HomeController;
+
 use \App\Http\Middleware\AdminMiddleware;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,7 +30,7 @@ Route::post('/items', [ItemController::class, 'store'])->name('items.store')->mi
 Route::delete('/items/{items}', [ItemController::class, 'destroy'])->name('items.destroy')->middleware(AdminMiddleware::class);
 Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit')->middleware(AdminMiddleware::class);
 Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update')->middleware(AdminMiddleware::class);
-Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show')->middleware(AdminMiddleware::class);
+Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
 Route::resource('creators', CreatorController::class)->middleware(AdminMiddleware::class);
 
